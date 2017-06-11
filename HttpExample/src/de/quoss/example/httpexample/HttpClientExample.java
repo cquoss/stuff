@@ -8,9 +8,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * example how to send a http request and receive the response
  * 
- * @author Clemens Quoß
+ * <p>
+ * example how to send a http request and receive the response
+ * </p>
+ *
+ * <p>
+ * TODO use properties to customize client behaviour
+ * </p>
+ * <p>
+ * TODO integrate client 2 example
+ * </p>
+ * 
+ * @author Clemens Quoss
  *
  */
 class HttpClientExample {
@@ -36,7 +46,8 @@ class HttpClientExample {
 		// try to open http connection
 		HttpURLConnection httpURLConnection = null;
 		try {
-			httpURLConnection = (HttpURLConnection) new URL("http://localhost:8080/?param1=value1&param2=value2").openConnection();
+			httpURLConnection = (HttpURLConnection) new URL("http://localhost:8080/?param1=value1&param2=value2")
+					.openConnection();
 		} catch (IOException e) {
 			throw new HttpExampleException(e);
 		}
@@ -47,14 +58,14 @@ class HttpClientExample {
 		} catch (ProtocolException e) {
 			throw new HttpExampleException(e);
 		}
-		
+
 		// try to connect
-		try  {
+		try {
 			httpURLConnection.connect();
 		} catch (IOException e) {
 			throw new HttpExampleException(e);
 		}
-		
+
 		// try to log response code
 		try {
 			int responseCode = httpURLConnection.getResponseCode();
@@ -62,7 +73,7 @@ class HttpClientExample {
 		} catch (IOException e) {
 			throw new HttpExampleException(e);
 		}
-		
+
 		// try to log response message
 		try {
 			String responseMessage = httpURLConnection.getResponseMessage();
@@ -70,7 +81,7 @@ class HttpClientExample {
 		} catch (IOException e) {
 			throw new HttpExampleException(e);
 		}
-		
+
 		// end message
 		LOGGER.log(Level.INFO, "end");
 

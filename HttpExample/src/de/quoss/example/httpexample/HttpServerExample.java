@@ -11,9 +11,15 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 /**
+ * <p>
  * example of a server handling http requests
+ * </p>
  * 
- * @author Clemens Quoß
+ * <p>
+ * TODO integrate server 2 example
+ * </p>
+ *
+ * @author Clemens Quoss
  *
  */
 class HttpServerExample {
@@ -64,20 +70,20 @@ class HttpServerExample {
 		 * handle http request
 		 */
 		public void handle(HttpExchange httpExchange) throws IOException {
-			
+
 			// inspect and log request
 			String requestMethod = httpExchange.getRequestMethod();
 			LOGGER.log(Level.INFO, "Request method: {0}", new Object[] { requestMethod });
-			
+
 			// format response
 			String response = String.format("Request with method %s received", requestMethod);
 			httpExchange.sendResponseHeaders(200, response.length());
 			OutputStream outputStream = httpExchange.getResponseBody();
 			outputStream.write(response.getBytes());
 			outputStream.close();
-			
+
 		}
-		
+
 	}
 
 	/**

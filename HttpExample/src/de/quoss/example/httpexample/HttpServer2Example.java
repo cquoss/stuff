@@ -1,4 +1,4 @@
-package de.quoss.examples.httpexample;
+package de.quoss.example.httpexample;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,9 +15,9 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
-class HttpServerExample {
+class HttpServer2Example {
 
-	private static final String CLASSNAME = HttpServerExample.class.getName();
+	private static final String CLASSNAME = HttpServer2Example.class.getName();
 
 	private static final Logger LOGGER = Logger.getLogger(CLASSNAME);
 
@@ -25,7 +25,7 @@ class HttpServerExample {
 
 	private static final String REQUEST_METHOD_POST = "POST";
 
-	private HttpServerExample() throws Exception {
+	private HttpServer2Example() throws Exception {
 		super();
 		HttpServer httpServer = HttpServer.create(new InetSocketAddress(8080), 0);
 		httpServer.createContext("/test", new HttpHandlerExample());
@@ -57,12 +57,10 @@ class HttpServerExample {
 				String filename = query.get("filename");
 				InputStream inputStream = httpExchange.getRequestBody();
 				int bytesRead;
-				int overallBytesRead = 0;
 				byte[] b = new byte[1024];
 				StringBuilder stringBuilder = new StringBuilder();
 				while ((bytesRead = inputStream.read(b)) != -1) {
 					stringBuilder.append(new String(b).substring(0, bytesRead));
-					overallBytesRead += bytesRead;
 				}
 				LOGGER.log(Level.INFO, " [stringBuilder={0}]", new Object[] { stringBuilder.toString() });
 				if (filename != null) {
@@ -85,23 +83,23 @@ class HttpServerExample {
 			outputStream.close();
 		}
 
-	}
-
-	private Map<String, String> queryToMap(String query) {
-		Map<String, String> result = new HashMap<String, String>();
-		for (String param : query.split("&")) {
-			String[] pair = param.split("=");
-			if (pair.length > 1) {
-				result.put(pair[0], pair[1]);
-			} else {
-				result.put(pair[0], "");
+		private Map<String, String> queryToMap(String query) {
+			Map<String, String> result = new HashMap<String, String>();
+			for (String param : query.split("&")) {
+				String[] pair = param.split("=");
+				if (pair.length > 1) {
+					result.put(pair[0], pair[1]);
+				} else {
+					result.put(pair[0], "");
+				}
 			}
+			return result;
 		}
-		return result;
+
 	}
 
 	public static void main(String[] args) throws Exception {
-		new HttpServerExample();
+		new HttpServer2Example();
 	}
 
 }

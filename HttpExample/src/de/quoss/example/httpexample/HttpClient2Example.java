@@ -1,4 +1,4 @@
-package de.quoss.examples.httpexample;
+package de.quoss.example.httpexample;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -8,9 +8,9 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class HttpClientExample {
+public class HttpClient2Example {
 
-	private static final String CLASSNAME = HttpClientExample.class.getName();
+	private static final String CLASSNAME = HttpClient2Example.class.getName();
 
 	private static final Logger LOGGER = Logger.getLogger(CLASSNAME);
 
@@ -18,9 +18,7 @@ public class HttpClientExample {
 
 	private static final String REQUEST_METHOD_POST = "POST";
 
-	private static final String REQUEST_METHOD_GET = "GET";
-
-	private HttpClientExample() throws Exception {
+	private HttpClient2Example() throws Exception {
 		super();
 		String urlString = String.format("http://localhost:8080/test?filename=%s", FILENAME);
 		// String urlString = "http://localhost:8080/test";
@@ -40,6 +38,7 @@ public class HttpClientExample {
 			stringBuilder.append(new String(b).substring(0, bytesRead));
 			overallBytesRead += bytesRead;
 		}
+		inputStream.close();
 		httpURLConnection.setRequestProperty("Content-Length", Integer.toString(overallBytesRead));
 		OutputStream outputStream = httpURLConnection.getOutputStream();
 		outputStream.write(stringBuilder.toString().getBytes());
@@ -57,7 +56,7 @@ public class HttpClientExample {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new HttpClientExample();
+		new HttpClient2Example();
 	}
 
 }
